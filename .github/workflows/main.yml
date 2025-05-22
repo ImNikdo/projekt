@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          repository: ImNikdo/projekt
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY  }}
       - run: |
           git remote add prod prod@stnc.cz:majda.git
