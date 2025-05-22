@@ -1,0 +1,18 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY  }}
+      - run: |
+          git remote add prod prod@stnc.cz:majda.git
+          git add .
+          git commit -m "New commits on main"
+          git push prod
