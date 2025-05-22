@@ -10,8 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: ImNikdo/projekt
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          repository: ImNikdo/projek
       - run: |
           git config --global user.email "burianek.jan@protonmail.com"
           git config --global user.name "satanicantichrist"
