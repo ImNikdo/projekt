@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: ImNikdo/projek
+          repository: ImNikdo/projekt
       - run: |
           git config --global user.email "burianek.jan@protonmail.com"
           git config --global user.name "satanicantichrist"
