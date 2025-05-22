@@ -14,7 +14,6 @@ jobs:
       - run: |
           git config --global user.email "burianek.jan@protonmail.com"
           git config --global user.name "satanicantichrist"
-          git remote add prod prod@stnc.cz:majda.git
           git add .
           git commit -m "New commits on main"
           git push prod
