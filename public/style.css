@@ -268,3 +268,126 @@ body.dark .comment-box button:hover {
   background-color: #555;
 }
 
+.logout-btn {
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.logout-btn:hover {
+  background-color: #ddd;
+}
+
+body.dark .logout-btn {
+  background-color: #444;
+  color: #eee;
+  border-color: #666;
+}
+body.dark .logout-btn:hover {
+  background-color: #555;
+}
+
+
+.auth-box input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.auth-box button {
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.auth-box button:hover {
+  background-color: #ddd;
+}
+
+body.dark .auth-box input {
+  background-color: #222;
+  color: #eee;
+  border-color: #666;
+}
+
+body.dark .auth-box button {
+  background-color: #444;
+  color: #eee;
+  border-color: #666;
+}
+body.dark .auth-box button:hover {
+  background-color: #555;
+}
+
+.auth-box {
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+body.dark .auth-box {
+  background-color: #1a1a1a;
+}
+
+
+/* Obecná tlačítka ve světlém režimu */
+button {
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-family: 'Special Elite', monospace;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+/* Obecná tlačítka v tmavém režimu */
+body.dark button {
+  background-color: #444;
+  color: #eee;
+  border-color: #666;
+}
+
+body.dark button:hover {
+  background-color: #555;
+}
+
+
+/* Obecné input pole ve tmavém režimu */
+body.dark input {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #666;
+}
+
+
+.liked {
+  background-color: #fdd;
+  border-color: #f99;
+  color: #a00;
+}
+body.dark .liked {
+  background-color: #633;
+  border-color: #a55;
+  color: #fdd;
+}

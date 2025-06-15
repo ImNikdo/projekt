@@ -1,12 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta property="og:title" content="Valentine" />
-  <meta property="og:description" content="Will you be my valentine?" />
-  <meta property="og:image" content="https://cdn.satanicantichrist.cz/valentine/favicon.png" />
-  <meta property="og:url" content="https://valentine.satanicantichrist.cz" />
-  <meta property="og:type" content="website" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Můj deník</title>
@@ -17,7 +11,7 @@
   <header>
     ✒️ Můj moderně-retro deník
       <button class="user-login" onclick="showLoginOptions()">👤 Přihlášení</button>
-       <div id="loggedInMessage"></div>
+      <!--<div id="loggedInMessage"></div>-->
        <p id="loggedInMessage"></p>
       <!--<button class= "logout-btn" onclick="logout()">Odhlásit se</button>-->
       <button class="logout-btn" id="logoutBtn" onclick="logout()" style="display: none;">Odhlásit se</button>
@@ -28,19 +22,24 @@
     <aside>
       <strong>Obsah</strong>
       <ul>
-        <li>📖 Zápis 1</li>
+        <li><a href="index.html"> 📖 Zápis 1</a></li>
         <li>🌧️ Zápis 2</li>
-        <li><a href="myslenky.html">🎧 Myšlenky</a></li>
+        <li>🎧 Myšlenky</li>
       </ul>
       <button id="darkModeToggle">Přepnout režim</button>
     </aside>
 
     <div class="notebook">
       <div class="date">28. května 2025</div>
-      <h1>Den, kdy jsem zpomalila - chat gpt</h1>
-      <p>Dnešek byl jiný. Klidnější. Ne tak hlasitý. Seděla jsem na lavičce a sledovala, jak padá stín stromu na zem. Překvapivě uklidňující.</p>
-      <p>Vím, že tohle chci dělat častěji. Psát. Pro sebe.</p>
-
+      <h1>Den, kdy jsem zpomalila</h1>
+      <p>Napíšu ti klidně love song,
+        ale bude smutnej,
+        nebude to nikdy o tom,
+        co zmrdi kolem chtěj,
+        nedospějem ani potom,
+        nás nikdy nezměněj,
+        tak lítej...</p>
+      <p></p>
       <div>Počet liků: <span id="likeCounter_clanek1">0</span></div>
       <button onclick="toggleLike('clanek1')">❤️ Líbí se mi</button>
       <div id="comments_clanek1"></div>
@@ -66,4 +65,5 @@
    <script src="script.js"></script>
 </body>
 </html>
+
 
