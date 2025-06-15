@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f3f3f3;
+  font-family: 'Special Elite', monospace;
+  color: #222;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+  background: #fff;
+  padding: 20px 50px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 1px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+main {
+  display: flex;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+aside {
+  flex: 0 0 200px;
+  padding-right: 20px;
+  border-right: 1px solid #ddd;
+  font-size: 14px;
+  color: #555;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+button#darkModeToggle {
+  margin-top: 15px;
+  padding: 8px 15px;
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+button#darkModeToggle:hover {
+  background-color: #ddd;
+}
+
+.notebook {
+  position: relative;
+  flex: 1;
+  background: #fff;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  margin-left: 20px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  border-left: 1px solid #ddd;
+}
+
+.notebook::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 35px;
+  width: 1px;
+  height: 100%;
+  background: #ddd;
+  transition: background-color 0.3s;
+}
+
+.date {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 15px;
+  transition: color 0.3s;
+}
+
+h1 {
+  font-size: 26px;
+  margin-top: 0;
+  position: relative;
+  padding-bottom: 10px;
+  transition: border-color 0.3s;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: #ddd;
+  transition: background-color 0.3s;
+}
+
+p {
+  line-height: 1.8;
+  font-size: 16px;
+  margin: 1em 0;
+  transition: color 0.3s;
+}
+
+footer {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-top: 60px;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* TMAVÝ REŽIM */
+body.dark {
+  background-color: #111;
+  color: #eee;
+}
+body.dark header {
+  background-color: #111;
+  color: #eee;
+  border-bottom-color: #333;
+}
+body.dark aside {
+  background: #111;
+  color: #ccc;
+  border-right-color: #333;
+}
+body.dark button#darkModeToggle {
+  background-color: #444;
+  color: #eee;
+  border-color: #666;
+}
+body.dark button#darkModeToggle:hover {
+  background-color: #555;
+}
+body.dark .notebook {
+  background-color: #222;
+  color: #ddd;
+  border-left-color: #444;
+  box-shadow: 0 0 20px rgba(255,255,255,0.05);
+}
+body.dark .notebook::before,
+body.dark h1::after {
+  background-color: #555;
+}
+body.dark .date {
+  color: #999;
+}
+body.dark footer {
+  background-color: #111;
+  color: #888;
+  border-top-color: #333;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.user-login {
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.user-login:hover {
+  background-color: #ddd;
+} 
+
+body.dark .user-login {
+  background-color: #444;
+  color: #eee;
+  border-color: #666;
+}
+body.dark .user-login:hover {
+  background-color: #555;
+}
+
+.interactions {
+  margin-top: 30px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.like-btn {
+  font-family: 'Special Elite', monospace;
+  font-size: 16px;
+  background-color: #ffe;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}   
+.like-btn:hover {
+  background-color: #fdd;
+}
+
+.comment-box {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.comment-box input {
+  flex: 1;
+  padding: 8px;
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+} 
+
+.comment-box button {
+  padding: 8px 12px;
+  font-family: 'Special Elite', monospace;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.comment-box button:hover {
+  background-color: #ddd;
+}
+
+/* Tmavý režim pro interakce */
+body.dark .interactions {
+  border-top-color: #555;
+}
+body.dark .like-btn {
+  background-color: #333;
+  color: #eee;
+  border-color: #666;
+}
+body.dark .like-btn:hover {
+  background-color: #444;
+}
+body.dark .comment-box input {
+  background-color: #222;
+  color: #eee;
+  border-color: #666;
+}
+body.dark .comment-box button {
+  background-color: #444;
+  color: #eee;
+  border-color: #666;
+}
+body.dark .comment-box button:hover {
+  background-color: #555;
+}
+
