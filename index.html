@@ -1,4 +1,64 @@
-Loading page???
-idk :/
-well, this will take time
-test???
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Můj deník</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    ✒️ Můj moderně-retro deník
+      <button class="user-login" onclick="showLoginOptions()">👤 Přihlášení</button>
+       <div id="loggedInMessage"></div>
+       <p id="loggedInMessage"></p>
+      <!--<button class= "logout-btn" onclick="logout()">Odhlásit se</button>-->
+      <button class="logout-btn" id="logoutBtn" onclick="logout()" style="display: none;">Odhlásit se</button>
+  </header>
+<div id="loggedInMessage" style="margin: 1rem; font-weight: bold;"></div>
+
+  <main>
+    <aside>
+      <strong>Obsah</strong>
+      <ul>
+        <li>📖 Zápis 1</li>
+        <li>🌧️ Zápis 2</li>
+        <li><a href="myslenky.html">🎧 Myšlenky</a></li>
+      </ul>
+      <button id="darkModeToggle">Přepnout režim</button>
+    </aside>
+
+    <div class="notebook">
+      <div class="date">28. května 2025</div>
+      <h1>Den, kdy jsem zpomalila - chat gpt</h1>
+      <p>Dnešek byl jiný. Klidnější. Ne tak hlasitý. Seděla jsem na lavičce a sledovala, jak padá stín stromu na zem. Překvapivě uklidňující.</p>
+      <p>Vím, že tohle chci dělat častěji. Psát. Pro sebe.</p>
+
+      <div>Počet liků: <span id="likeCounter_clanek1">0</span></div>
+      <button onclick="toggleLike('clanek1')">❤️ Líbí se mi</button>
+      <div id="comments_clanek1"></div>
+      <div class="comment-box"></div>
+        <input type="text" id="commentInput_clanek1" placeholder="Napiš komentář">
+        <button onclick="addComment('clanek1')">Odeslat</button>
+      </div>
+    </div>
+    <div id="authArea"></div>
+  </main>
+
+  <footer>
+    Psáno při šálku čaje a šumu větru 🍃
+  </footer>
+
+  <script>
+    const toggle = document.getElementById("darkModeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+  </script>
+
+   <script src="script.js"></script>
+</body>
+</html>
+
