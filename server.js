@@ -7,6 +7,24 @@ const db = new sqlite3.Database('./users.db');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+//
+app.get('/likes/:postId', (req, res) => {
+  const postId = req.params.postId;
+  db.all('SELECT likes FROM users', [], (err, rows) => {
+    if (err) return res.status(500).send({ count: 0 });
+
+    let count = 0;
+    rows.forEach(user => {
+      try {
+        const likes = JSON.parse(user.likes || '{}');
+        if (likes[postId]) count++;
+      } catch (_) {}
+    });
+
+    res.send({ count });
+  });
+});
+
 // Vytvoření tabulky při prvním spuštění
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -44,12 +62,25 @@ app.post('/login', (req, res) => {
 // Uložení like
 app.post('/like', (req, res) => {
   const { username, postId } = req.body;
-  db.get('SELECT likes FROM users WHERE username = ?', [username], (err, user) => {
-    if (!user) return res.status(404).send();
+
+  if (!username || !postId) {
+    return res.status(400).send({ message: 'Chybí username nebo postId.' });
+  }
+
+  db.get('SELECT * FROM users WHERE username = ?', [username], (err, user) => {
+    if (err || !user) return res.status(403).send({ message: 'Neautorizováno.' });
+
     let likes = JSON.parse(user.likes || '{}');
-    likes[postId] = true;
+
+    // Přepnout stav lajku
+    if (likes[postId]) {
+      delete likes[postId]; // Unlike
+    } else {
+      likes[postId] = true; // Like
+    }
+
     db.run('UPDATE users SET likes = ? WHERE username = ?', [JSON.stringify(likes), username]);
-    res.send({ message: 'Like uložen.' });
+    res.send({ message: 'Stav lajku uložen.' });
   });
 });
 
@@ -66,6 +97,31 @@ app.get('/comments/:postId', (req, res) => {
     res.send(rows);
   });
 });
+
+app.get('/likes/:postId', (req, res) => {
+  const postId = req.params.postId;
+  db.all('SELECT likes FROM users', [], (err, rows) => {
+    if (err) return res.status(500).send();
+    const count = rows.filter(row => {
+      const liked = JSON.parse(row.likes || '{}');
+      return liked[postId];
+    }).length;
+    res.send({ count });
+  });
+});
+
+// Získání informací o uživateli podle username
+app.get('/user/:username', (req, res) => {
+  const { username } = req.params;
+  db.get('SELECT username, likes FROM users WHERE username = ?', [username], (err, user) => {
+    if (err || !user) {
+      return res.status(404).send({ message: 'Uživatel nenalezen.' });
+    }
+    res.send(user);
+  });
+});
+
+
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server běží na http://localhost:${PORT}`));
