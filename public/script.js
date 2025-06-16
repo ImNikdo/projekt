@@ -49,6 +49,8 @@ async function register() {
 
   if (res.ok) {
     loggedInUser = username;
+    localStorage.setItem("loggedInUser", username);
+    document.getElementById("loggedInMessage").textContent = `Přihlášen jako ${username}`;
     document.getElementById("authArea").innerHTML = "";
     document.getElementById("logoutBtn").style.display = "inline-block";
     fetchComments();
@@ -70,6 +72,8 @@ async function login() {
 
   if (res.ok) {
     loggedInUser = username;
+    localStorage.setItem("loggedInUser", username);
+    document.getElementById("loggedInMessage").textContent = `Přihlášen jako ${username}`;
     document.getElementById("authArea").innerHTML = "";
     document.getElementById("logoutBtn").style.display = "inline-block";
     fetchComments();
@@ -79,6 +83,7 @@ async function login() {
 
 function logout() {
   loggedInUser = null;
+  localStorage.removeItem("loggedInUser");
   document.getElementById("loggedInMessage").textContent = "Byl jsi odhlášen.";
   document.getElementById("logoutBtn").style.display = "none";
   document.querySelector(`#likeBtn_${ARTICLE_ID}`)?.classList.remove("liked");
@@ -112,41 +117,74 @@ async function fetchComments() {
 }
 
 // Lajkování
-async function toggleLike() {
+async function toggleLike(articleId) {
   if (!loggedInUser) {
     alert("Přihlas se, abys mohl lajkovat.");
     return;
   }
 
-  await fetch("/like", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: loggedInUser, postId: ARTICLE_ID }),
-  });
+  try {
+    const btn = document.querySelector(`#likeBtn_${articleId}`);
+    const liked = btn.classList.contains("liked");
 
-  document.querySelector(`#likeBtn_${ARTICLE_ID}`)?.classList.add("liked");
-}
+    await fetch("/like", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: loggedInUser, postId: articleId }),
+    });
 
-// Kontrola, jestli uživatel lajknul
-async function checkLikeStatus() {
-  if (!loggedInUser) return;
+    // Přepnout třídu
+    btn.classList.toggle("liked");
 
-  const res = await fetch("/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: loggedInUser, password: "" }), // Hack: jen pro načtení like info
-  });
+    // Manuálně upravit počitadlo bez čekání na server
+    const counterSpan = document.getElementById(`likeCounter_${articleId}`);
+    let currentCount = parseInt(counterSpan.textContent) || 0;
+    counterSpan.textContent = liked ? currentCount - 1 : currentCount + 1;
 
-  const data = await res.json();
-  if (data && data.likes) {
-    const likes = JSON.parse(data.likes);
-    if (likes[ARTICLE_ID]) {
-      document.querySelector(`#likeBtn_${ARTICLE_ID}`)?.classList.add("liked");
-    }
+  } catch (err) {
+    console.error("Chyba při ukládání lajku:", err);
   }
 }
 
+async function updateLikeCounter(articleId) {
+  try {
+    const res = await fetch(`/likes/${articleId}`);
+    const data = await res.json();
+    document.getElementById(`likeCounter_${articleId}`).textContent = data.count;
+  } catch (err) {
+    console.error("Nepodařilo se načíst počet lajků:", err);
+  }
+}
+
+
+
+// Kontrola, jestli uživatel lajknul
+async function checkLikeStatus() {
+  const username = localStorage.getItem("loggedInUser");
+  if (!username) return;
+
+  try {
+    const res = await fetch(`/user/${username}`);
+    const data = await res.json();
+
+    const likes = JSON.parse(data.likes || "{}");
+    if (likes[ARTICLE_ID]) {
+      document.querySelector(`#likeBtn_${ARTICLE_ID}`)?.classList.add("liked");
+    }
+  } catch (err) {
+    console.error("Chyba při získávání lajků:", err);
+  }
+}
+
+
 // Spuštění při načtení
 window.addEventListener("DOMContentLoaded", () => {
+  loggedInUser = localStorage.getItem("loggedInUser");
+  if (loggedInUser) {
+    document.getElementById("logoutBtn").style.display = "inline-block";
+    checkLikeStatus();
+  }
   fetchComments();
+  updateLikeCounter(ARTICLE_ID);
 });
+
